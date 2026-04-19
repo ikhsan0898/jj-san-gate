@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JJ SAN Generator</title>
+
+<style>
+body {
+    background: black;
+    color: white;
+    text-align: center;
+    font-family: Arial;
+}
+input, button {
+    padding: 10px;
+    margin: 5px;
+    width: 80%;
+    border-radius: 10px;
+    border: none;
+}
+button {
+    background: cyan;
+    cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<h2>🔥 JJ SAN LINK GENERATOR</h2>
+
+<input id="sub" placeholder="Link Subscribe YouTube"><br>
+<input id="like" placeholder="Link Video YouTube"><br>
+<input id="target" placeholder="Link Tujuan"><br>
+
+<button onclick="buat()">BUAT LINK</button>
+
+<p id="hasil"></p>
+
+<script>
+function buat(){
+    let id = Math.random().toString(36).substring(7);
+
+    let sub = encodeURIComponent(document.getElementById("sub").value);
+    let like = encodeURIComponent(document.getElementById("like").value);
+    let target = encodeURIComponent(document.getElementById("target").value);
+
+    let link = location.origin + "/gate.html?id=" + id +
+        "&sub=" + sub + "&like=" + like + "&target=" + target;
+
+    document.getElementById("hasil").innerText = link;
+}
+</script>
+
+</body>
+</html>
