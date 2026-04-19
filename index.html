@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>JJ SAN Gate</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Orbitron', sans-serif;
+  background: black;
+  color: white;
+  text-align: center;
+}
+
+@keyframes rgb {
+  0% { box-shadow: 0 0 15px red; }
+  33% { box-shadow: 0 0 15px lime; }
+  66% { box-shadow: 0 0 15px cyan; }
+  100% { box-shadow: 0 0 15px red; }
+}
+
+.container {
+  padding: 20px;
+  max-width: 420px;
+  margin: auto;
+}
+
+.card {
+  background: #111;
+  border-radius: 20px;
+  padding: 20px;
+  animation: rgb 2s infinite;
+}
+
+.profile {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: auto;
+  animation: rgb 2s infinite;
+}
+
+.profile img {
+  width: 100%;
+}
+
+.title {
+  font-size: 28px;
+  margin-top: 10px;
+}
+
+/* INPUT */
+input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 8px;
+  border: none;
+}
+
+/* BUTTON */
+.btn {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.red { background: red; color: white; }
+.gray { background: #222; color: #aaa; }
+.cyan { background: cyan; color: black; }
+
+.hidden { display: none; }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <div class="card">
+
+    <div class="profile">
+      <img src="profil.jpg">
+    </div>
+
+    <div class="title">JJ SAN</div>
+
+    <h3>🔧 Setup Link (Isi dulu)</h3>
+
+    <input id="subLink" placeholder="Link Subscribe Channel">
+    <input id="likeLink" placeholder="Link Video (Like)">
+    <input id="commentLink" placeholder="Link Video (Comment)">
+
+    <button class="btn cyan" onclick="saveLinks()">Simpan Link</button>
+
+    <div id="main" class="hidden">
+
+      <h3>1. Subscribe</h3>
+      <a id="btnSub" target="_blank" class="btn red">SUBSCRIBE</a>
+
+      <h3>2. Like Video</h3>
+      <a id="btnLike" target="_blank" class="btn red">LIKE</a>
+
+      <h3>3. Comment Video</h3>
+      <a id="btnComment" target="_blank" class="btn red">COMMENT</a>
+
+      <button class="btn gray" onclick="unlock()">✔ Sudah semua</button>
+
+      <div id="result" class="hidden">
+        <h3>🎉 Berhasil!</h3>
+        <a href="#" class="btn cyan">LANJUT KE KONTEN</a>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<script>
+function saveLinks() {
+  let sub = document.getElementById("subLink").value;
+  let like = document.getElementById("likeLink").value;
+  let comment = document.getElementById("commentLink").value;
+
+  if(!sub || !like || !comment){
+    alert("Isi semua link dulu!");
+    return;
+  }
+
+  localStorage.setItem("sub", sub);
+  localStorage.setItem("like", like);
+  localStorage.setItem("comment", comment);
+
+  loadLinks();
+}
+
+function loadLinks() {
+  let sub = localStorage.getItem("sub");
+  let like = localStorage.getItem("like");
+  let comment = localStorage.getItem("comment");
+
+  if(sub && like && comment){
+    document.getElementById("main").classList.remove("hidden");
+
+    document.getElementById("btnSub").href = sub;
+    document.getElementById("btnLike").href = like;
+    document.getElementById("btnComment").href = comment;
+  }
+}
+
+function unlock(){
+  document.getElementById("result").classList.remove("hidden");
+}
+
+loadLinks();
+</script>
+
+</body>
+</html>
